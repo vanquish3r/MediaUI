@@ -155,6 +155,8 @@ namespace Arti
             }
             ResultsScrollbar.value = 1;
             searchResultsCache = searchResultsCache.Resize(0);
+            throbber.SetActive(false);
+            resultsInfoText.text = "";
         }
 
         public override void OnStringLoadSuccess(IVRCStringDownload result)
@@ -171,7 +173,8 @@ namespace Arti
             else
             {
                 Debug.Log($"JSON Deserialization error message: {deserializedData}");
-                Debug.Log("Donwloaded String Deserialization Failed");
+                throbber.SetActive(false);
+                resultsInfoText.text = "API Error";
                 return;
             }
 
@@ -184,11 +187,14 @@ namespace Arti
             else
             {
                 Debug.Log("JSON doesn't contain Results object");
+                throbber.SetActive(false);
+                resultsInfoText.text = "API Error";
                 return;
             }
             if (ResultsData.DataList.ToArray().Length == 0)
             {
                 Debug.Log("JSON doesn't contain any results (nothing found)");
+                throbber.SetActive(false);
                 resultsInfoText.text = "No results found";
                 return;
             }

@@ -5,6 +5,7 @@ using VRC.SDK3.StringLoading;
 using UnityEngine.UI;
 using VRC.Udon.Common.Interfaces;
 using VRC.SDK3.Data;
+using TMPro;
 
 
 namespace Arti
@@ -27,6 +28,7 @@ namespace Arti
         public VRCUrlsArray urlsArray = null;
 
         public GameObject SeasonsButton = null;
+        public TextMeshProUGUI detailsInfoText = null;
 
         private DataToken dataToken;
         private DataToken seasonsData;
@@ -133,7 +135,8 @@ namespace Arti
             else
             {
                 Debug.Log($"JSON Deserialization error message: {deserializedData}");
-                Debug.Log("Donwloaded String Deserialization Failed");
+                throbber.SetActive(false);
+                detailsInfoText.text = "API Error";
                 return;
             }
 
@@ -146,11 +149,15 @@ namespace Arti
             else
             {
                 Debug.Log("JSON doesn't contain episodes object");
+                throbber.SetActive(false);
+                detailsInfoText.text = "API Error";
                 return;
             }
             if (ResultsData.DataList.ToArray().Length == 0)
             {
                 Debug.Log("JSON doesn't contain any episodes (no episodes found)");
+                throbber.SetActive(false);
+                detailsInfoText.text = "No episodes found";
                 return;
             }
 
@@ -194,6 +201,7 @@ namespace Arti
             }
             seasonsEpisodesScrollbar.value = 1;
             seasonsEpisodesCache = seasonsEpisodesCache.Resize(0);
+            detailsInfoText.text = "";
         }
 
         private void SetUiTextValueFromDataToken(Text uiText, string valueName, DataToken dataToken, TokenType type = TokenType.String, string defaultString = "NoData")
