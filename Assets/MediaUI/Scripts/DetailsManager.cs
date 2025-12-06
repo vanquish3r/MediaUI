@@ -1,4 +1,4 @@
-﻿using UdonSharp;
+using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.SDK3.StringLoading;
@@ -199,9 +199,9 @@ namespace Arti
             {
                 Destroy(obj);
             }
-            seasonsEpisodesScrollbar.value = 1;
+            if (Utilities.IsValid(seasonsEpisodesScrollbar)) seasonsEpisodesScrollbar.value = 1;
             seasonsEpisodesCache = seasonsEpisodesCache.Resize(0);
-            detailsInfoText.text = "";
+            if (Utilities.IsValid(detailsInfoText)) detailsInfoText.text = "";
         }
 
         private void SetUiTextValueFromDataToken(Text uiText, string valueName, DataToken dataToken, TokenType type = TokenType.String, string defaultString = "NoData")
