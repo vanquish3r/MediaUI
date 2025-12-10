@@ -18589,7 +18589,7 @@ MonoBehaviour:
   throbber: {fileID: 3928273018658775752}
   urlsArray: {fileID: 6159225643883185100}
   SeasonsButton: {fileID: 225463439521466563}
-  detailsInfoText: {fileID: 0}
+  detailsInfoText: {fileID: 6921004485899790820}
 --- !u!114 &3512478289004834866
 MonoBehaviour:
   m_ObjectHideFlags: 0
